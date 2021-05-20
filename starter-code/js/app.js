@@ -1,25 +1,21 @@
 'use strict';
 
-// Cart constructor.
 const Cart = function(items) {
-  // this.items is an array of CartItem instances.
   this.items = items;
 };
 
 Cart.prototype.addItem = function(product, quantity) {
-  // DONE: Fill in this instance method to create a new CartItem and add it to this.items
   let myItem = new CartItem(product, quantity);
   this.items.push(myItem);
 };
 
 Cart.prototype.saveToLocalStorage = function() {
-  // TODO: Fill in this instance method to save the contents of the cart to localStorage
+  const stringItems = JSON.stringify(this.items);
+  localStorage.setItem('userCart', stringItems);
 };
 
 Cart.prototype.removeItem = function(item) {
-  // TODO: Fill in this instance method to remove one item from the cart.
-  // Note: You will have to decide what kind of parameter to pass in here!
-  // 'please learn the splice method because you will need it'
+  this.items.splice(item,1);
 };
 
 const CartItem = function(product, quantity) {
@@ -27,7 +23,6 @@ const CartItem = function(product, quantity) {
   this.quantity = quantity;
 };
 
-// Product contructor.
 const Product = function(filePath, name) {
   this.filePath = filePath;
   this.name = name;
